@@ -52,7 +52,13 @@ const RepositoryDetail = () => {
         </a>
         {repositoryDetail.demo_video_url && (
           <video controls className="repository-detail-area-video">
-            <source src={repositoryDetail.demo_video_url} type="video/mp4" />
+            <source
+              src={repositoryDetail.demo_video_url.replace(
+                "/upload/",
+                "/upload/f_mp4,vc_h264/",
+              )}
+              type="video/mp4"
+            />
           </video>
         )}
         {repositoryDetail.favorite ? (
