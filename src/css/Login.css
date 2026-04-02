@@ -1,0 +1,276 @@
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 1px gainsboro; 
+    width:100%;
+}
+
+.login-header button {
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    border: solid 1px gainsboro;
+    margin-top: 20px;
+}
+.main-visula {
+    width: 980px;
+    position: relative;
+    height: 500px;
+    margin: 0px auto;
+}
+.main-visula img {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 480px;
+}
+.slogan-area {
+    position: absolute;
+    left: 539px;
+    top: 0px;
+}
+
+.slogan-area h2 {
+    background: rgba(255, 255, 255, 0.68);
+    text-wrap-mode: nowrap;
+    font-size: 50px;
+    margin-top: 0px;
+}
+
+.slogan-area h2 small {
+    color: #3cb371;
+}
+
+.sign-up-btn-area {
+    position: absolute;
+    right: 0px;
+}
+
+.sign-up-btn-area button {
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #3cb371;
+    border: none;
+    color: white;
+}
+ .login-area-wrap-none {
+    display: none;
+ }
+.login-area-wrap {
+    display: block;
+    position: fixed;
+    top:0px;
+    left:0px;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 999;
+    background-color:rgba(0,0,0,0.5);
+}
+
+.login-area {
+    width: 500px;
+    background-color: white;
+    border: solid 1px gainsboro;
+    border-radius: 5px;
+    margin: 50px auto;
+}
+.login-close-btn {
+    font-size: 30px;
+    background-color: rgba(255, 255, 255, 1.0);
+    border: none;
+}
+.login-area h3 {
+    margin: 0px;
+    border-bottom: solid 1px gainsboro;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.login-area small {
+    display: block;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.login-area-form-input {
+    width: 80%;
+    height: 30px;
+    display: block;
+    margin:5px auto;
+}
+
+#login-area-form-link {
+    display: block;
+    color: #3cb371;
+    padding: 10px 0px;
+    text-align: center;
+}
+
+.login-area-form-button {
+    display: block;
+    background-color: #3cb371;
+    border: none;
+    width: 150px;
+    height: 30px;
+    color: white;
+    margin: 10px auto;
+}
+
+
+.error_message {
+    width: 80%;
+    margin: 20px auto;
+    color: red;
+  }
+
+  .summary-area {
+    width: 80%;
+    margin: 50px auto;
+  }
+
+  .summary-area h2 {
+    width: 200px;
+    margin: 20px auto;
+    padding-bottom: 15px;
+    text-align: center;
+    border-bottom: solid 5px #3cb371;
+  }
+
+  .function-summary-wrap {
+    background-color:#F4F5F6;
+  }
+
+  .function-summary-wrap h2 {
+    color: #3cb371;
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .function-summary-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    justify-content: space-around;
+    justify-content: flex-start;
+  }
+
+  .function-summary-item {
+    margin: 2px;
+    width:30%;
+    border: solid 1px gainsboro;
+    background-color: white;
+    padding: 20px;
+  }
+
+@media screen and (max-width:1380px) {
+    .function-summary-area {
+        justify-content:center;
+    }
+
+    .function-summary-item {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:920px) {
+    .function-summary-area {
+        display: block;
+    }
+
+    .function-summary-item {
+        width:80%;
+        margin: 10px auto;
+    }
+}
+
+
+  @media screen and (max-width:980px) {
+    .login-header {
+        width: 100%;
+    }
+    
+    .main-visula {
+        width: 680px;
+        height: 340px;
+    }
+    
+    .slogan-area {
+        left: 240px;
+    }
+
+    .main-visula img {
+       width: 500px;
+       height: auto;
+    }
+}
+
+@media screen and (max-width:680px) {
+    .main-visula {
+        width:100%;
+        height: 440px;
+    }
+    
+    .slogan-area {
+        width: 100%;
+        left: 0px;
+        background:none;
+    }
+
+    .slogan-area h2 {
+        background:none;
+    }
+
+    .main-visula img {
+       width: 100%;
+    }
+
+    .sign-up-btn-area {
+        left: 0px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .main-visula {
+        height: 393px;
+    }
+
+    .login-area {
+        width:80%;
+    }
+}
+
+
+@media screen and (max-width:450px) {
+    .main-visula {
+        height: 310px;
+    }
+    .slogan-area h2 {
+        font-size: 40px;
+    }
+
+    .login-header h1 {
+        font-size: 20px;
+    }
+
+    .login-header button {
+        margin: 0px;
+        height: 40px;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .main-visula {
+        height: 240px;
+    }
+    .slogan-area h2 {
+        font-size: 30px;
+    }
+}
+
+
+
+

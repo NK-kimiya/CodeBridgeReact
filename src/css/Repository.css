@@ -1,0 +1,264 @@
+#repository-category-selected-area {
+    display: flex;
+    flex-wrap: wrap;
+}
+#repository-create-area h2 {
+    color: white;
+    width: 200px;
+    margin: 10px auto;
+    border-bottom:solid #3cb371;
+}
+#repository-create-area input,
+#repository-create-area textarea {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+}
+
+#repository-create-area input {
+    height: 30px;
+}
+
+#repository-create-area textarea {
+    height: 80px;
+}
+
+.repository-category-selected-item {
+    background-color:white;
+    border-radius: 20px;
+    color: #3cb371;
+    padding: 3px 5px;
+    border: solid 1px #3cb371;
+    margin: 5px;
+}
+
+#repository-create-btn {
+    display: block;
+    margin: 20px auto;
+    background-color: #3cb371;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+}
+
+#repository-create-modal {
+    display: block;
+    background-color: #3cb371;
+    color: white;
+    width: 80px;
+    height: 80px;
+    line-height: 66px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 40px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+}
+    
+
+.repository-list-area-item{
+    display: block;
+    padding: 10px 30px;
+    text-align: left;
+    color: #3cb371;
+    border-bottom:solid 1px gray;
+    text-decoration: none;
+}
+
+.error_message {
+    width: 80%;
+    margin: 20px auto;
+    color: red;
+  }
+
+
+
+#repository-close-btn {
+    display: block;
+    background-color: black;
+    border: none;
+    color: white;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    margin: 10px auto;
+}
+
+.repository-detail-area {
+    width: 80%;
+    margin:0px auto;
+}
+.repository-detail-area-title {
+    border-bottom: solid 1px gainsboro;
+    padding-bottom: 10px;
+}
+.repository-detail-area-video {
+    display: block;
+    width: 70%;
+    margin: 20px auto;
+}
+
+.repository-detail-area-description {
+    width: 100%;
+    text-align: left;
+    margin: 10px auto;
+    white-space: pre-wrap;
+}
+
+.repository-detail-area-link {
+    width: 100%;
+    margin: 10px auto;
+    display: block;
+    text-align: left;
+    color: #3cb371;
+}
+
+#message-list-area {
+    width: 80%;
+    margin: 20px auto;
+    height: 300px;
+    overflow-y: auto;    
+}
+
+#message-send-area {
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+}
+
+#message-send-area textarea {
+    width: 100%;
+    height: 150px;
+}
+
+#message-send-area button {
+    display: block;
+    width: 20%;
+    margin: 10px auto;
+    padding: 10px 15px;
+    background-color: #3cb371;
+    border: none;
+    color: white;
+}
+
+.repository-item small {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+
+.repository-list-wrap {
+    height: 500px;
+    overflow-y: auto;    
+}
+
+#chat-area {
+    padding-left: 70px;
+}
+
+.git-icon {
+    width: 80%;
+    margin: 0px auto;
+    margin-top: 150px;
+    text-align: center;
+    font-size: 100px;
+    color: #3cb371;
+}
+
+.git-icon p {
+    font-size: 20px;
+}
+
+.category-search-btn {
+    background-color: #3cb371;
+    color:white;
+    border: none;
+    padding:5px 10px;
+    margin-top: 15px;
+}
+.search-clear-btn {
+    background-color:gray;
+    color:white;
+    border: none;
+    padding:5px 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.repository-favorite-delete-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.repository-favorite-add-btn {
+    background-color:#3cb371;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+.repository-favorite-add-btn svg {
+    color: red;
+}
+
+@media screen and (max-width:1000px) {
+    .repository-detail-area {
+        padding-left: 70px;
+    }
+
+    
+}
+
+@media screen and (max-width:980px) {
+    .repository-detail-area-video {
+        width: 100%;
+    } 
+}
+
+@media screen and (max-width:700px) {
+    #message-send-area button {
+        width: 80%;
+    } 
+    .repository-detail-area {
+        width: 80%;
+        margin: 20px auto;
+        padding: 0px;
+    }
+
+    #chat-area {
+        padding-left:0px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .repository-detail-area {
+        width: 80%;
+        margin: 20px auto;
+        padding: 0px;
+        padding-left: 30px;
+    }
+
+    #chat-area {
+        padding-left:0px;
+    }
+
+    .git-icon {
+        padding-left: 70px;
+    }
+    .git-icon p {
+        text-align: left;
+    }
+}
+
+

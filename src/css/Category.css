@@ -1,0 +1,30 @@
+#category_area {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+.category_area_item {
+    background-color:white;
+    border-radius: 20px;
+    color: #3cb371;
+    padding: 3px 5px;
+    border: solid 1px #3cb371;
+    margin: 5px;
+}
+
+#category-modal-btn {
+    display: block;
+    background-color: #3cb371;
+    color: white;
+    border: solid 1px white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.error_message {
+  width: 80%;
+  margin: 20px auto;
+  color: red;
+}

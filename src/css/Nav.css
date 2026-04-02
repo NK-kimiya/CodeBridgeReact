@@ -1,0 +1,99 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color:#3cb371;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+}
+
+nav h1 {
+    color:white;
+    margin-left: 100px;
+}
+
+nav button {
+    display: block;
+    border: solid 1px white;
+    background-color:#3cb371;
+    color: white;
+    height: 30px;
+}
+
+.sub-nav-area {
+    width: 200px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    min-height: 100vh;
+    background-color: black;
+    z-index: 999;
+}
+
+.sub-nav-area ul {
+    list-style: none;
+    padding: 0px;
+    width: 100%;
+}
+.sub-nav-area ul li {
+    display: block;
+    width: 100%;
+    padding-top: 15px;
+    border-bottom:solid 1px white ;
+    padding-bottom: 5px;
+}
+.sub-nav-area ul li a {
+    color: white;
+    text-decoration: none;
+}
+.sub-nav-area ul li a small {
+    padding: 3px 10px;
+    background-color: #3cb371;
+    color: white;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.sub-nav-area-none {
+    width: 70px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    min-height: 100vh;
+    background-color: black;
+}
+
+.sub-nav-area-none ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.sub-nav-toggle-btn {
+    color: white;
+    background-color: rgba(0, 0,0, 1);
+    border: none;
+    font-size: 25px;
+}
+
+.sub-nav-area-none ul li {
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+.sub-nav-area-none ul li a {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+.sub-nav-area-none ul li a svg {
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+
+@media screen and (max-width:450px) {
+    nav h1 {
+        margin-left: 0px;
+        padding-left:80px;
+        font-size: 20px;
+    }
+}

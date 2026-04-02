@@ -1,0 +1,45 @@
+#entering-area {
+    width: 300px;
+    margin: 50px auto;
+}
+
+.entering-area-form-input {
+    width: 100%;
+    height: 30px;
+    display: block;
+    margin-top: 10px;
+}
+
+#entering-area-form-link {
+    display: block;
+    color: #3cb371;
+    padding: 10px 0px;
+    text-align: center;
+}
+
+.entering-area-form-button {
+    display: block;
+    background-color: #3cb371;
+    border: none;
+    width: 150px;
+    height: 30px;
+    color: white;
+    margin: 10px auto;
+}
+
+.room-login-area .sub-nav-area-none {
+    display: none;
+}
+
+.error_message {
+    width: 80%;
+    margin: 20px auto;
+    color: red;
+}
+
+
+@media screen and (max-width:450px) {
+    #entering-area {
+        width: 80%;
+    }
+}
