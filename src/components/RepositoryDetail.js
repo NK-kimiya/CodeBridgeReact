@@ -52,9 +52,7 @@ const RepositoryDetail = () => {
         </a>
         {repositoryDetail.demo_video && (
           <video controls className="repository-detail-area-video">
-            <source
-              src={`${(<source src={repositoryDetail.demo_video_url} />)}`}
-            />
+            <source src={repositoryDetail.demo_video_url} type="video/mp4" />
           </video>
         )}
         {repositoryDetail.favorite ? (
