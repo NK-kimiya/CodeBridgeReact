@@ -50,7 +50,7 @@ const RepositoryDetail = () => {
         <a href={repositoryDetail.url} className="repository-detail-area-link">
           {repositoryDetail.url}
         </a>
-        {repositoryDetail.demo_video && (
+        {repositoryDetail.demo_video_url && (
           <video controls className="repository-detail-area-video">
             <source src={repositoryDetail.demo_video_url} type="video/mp4" />
           </video>
