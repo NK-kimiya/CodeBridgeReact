@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "./App.css";
-import "./css/Nav.css";
-import "./css/Room.css";
-import "./css/Category.css";
-import "./css/Repository.css";
+// import "./css/Nav.css";
+// import "./css/Room.css";
+// import "./css/Category.css";
+// import "./css/Repository.css";
 import Nav from "./components/Nav";
 import Category from "./components/Category";
 import Repository from "./components/Repository";

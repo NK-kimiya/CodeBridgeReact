@@ -104,14 +104,19 @@ const Login = (props) => {
   };
   return (
     <div>
-      <div className="row min-vh-100 d-flex justify-content-center align-items-center">
-        <div className="col-6 p-5">
-          <h2 className="text-end p-5">Code bridge</h2>
+      <div className="d-flex flex-column flex-lg-row justify-content-center align-items-center bg-dark min-vh-100">
+        <div className="col-lg-6 p-0 p-md-5 ">
+          <h2 className="text-center text-lg-end p-0 text-white">
+            CODE BRIDGE
+          </h2>
         </div>
-        <div className="col-6">
-          <div className="w-50">
+        <div className="col-12 col-lg-6 p-0 px-5 d-flex justify-content-center justify-content-lg-start">
+          <div className="w-lg-75">
             <form onSubmit={login} className="">
-              <label for="exampleFormControlInput1" className="form-label">
+              <label
+                for="exampleFormControlInput1"
+                className="form-label text-white"
+              >
                 Email address
               </label>
               <input
@@ -125,7 +130,10 @@ const Login = (props) => {
               />
               {!state.isLoginView && (
                 <div>
-                  <label for="exampleInputUsername" className="form-label">
+                  <label
+                    for="exampleInputUsername"
+                    className="form-label text-white"
+                  >
                     Username
                   </label>
                   <input
@@ -138,7 +146,10 @@ const Login = (props) => {
                   ></input>
                 </div>
               )}
-              <label for="exampleInputPassword1" className="form-label">
+              <label
+                for="exampleInputPassword1"
+                className="form-label text-white"
+              >
                 Password
               </label>
               <input
@@ -149,21 +160,19 @@ const Login = (props) => {
                 value={state.credentialsLog.password}
                 onChange={inputChangeLog}
               ></input>
-              <a
-                href="#"
-                id="login-area-form-link"
-                onClick={() => toggleView()}
-              >
-                {state.isLoginView ? "新規作成" : "ログイン"}
-              </a>
-              <p className="error_message">{loginErrorMessage}</p>
+              <p className="pt-3">
+                <a href="#" className="text-white" onClick={() => toggleView()}>
+                  {state.isLoginView ? "新規作成はこちら" : "ログインはこちら"}
+                </a>
+              </p>
+              <p className="error_message text-danger">{loginErrorMessage}</p>
               {state.isLoginView ? (
-                <button className="btn btn-warning " type="submit">
-                  ログイン
+                <button className="btn btn-warning text-white" type="submit">
+                  Login
                 </button>
               ) : (
-                <button className="btn btn-warning " type="submit">
-                  新規作成
+                <button className="btn btn-warning text-white" type="submit">
+                  Sign up
                 </button>
               )}
             </form>
