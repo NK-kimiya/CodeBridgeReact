@@ -10,6 +10,87 @@ import apiClient from "../apiClient";
 import { SOCKET_URL } from "../config";
 import socketClient from "../socketClient";
 export const RepositoryContext = createContext();
+const uploadToCloudinary = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "your_preset");
+
+  const res = await fetch(
+    "https://api.cloudinary.com/v1_1/あなたのcloud_name/video/upload",
+    {
+      method: "POST",
+      body: formData,
+    },
+  );
+
+  const data = await res.json();
+  return data.secure_url;
+};
+
+const uploadLargeVideo = async (file) => {
+  const cloudName = "dl56fz2c5";
+  const uploadPreset = "codebridge";
+
+  const chunkSize = 5 * 1024 * 1024;
+  const totalChunks = Math.ceil(file.size / chunkSize);
+
+  let uploadId = null;
+  let finalData = null;
+
+  const publicId = `video_${Date.now()}`;
+
+  // ✅ 追加
+  const uniqueUploadId = crypto.randomUUID();
+
+  for (let i = 0; i < totalChunks; i++) {
+    const start = i * chunkSize;
+    const end = Math.min(start + chunkSize, file.size);
+    const chunk = file.slice(start, end);
+
+    const contentRange = `bytes ${start}-${end - 1}/${file.size}`;
+
+    const formData = new FormData();
+    formData.append("file", chunk);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("public_id", publicId);
+
+    if (uploadId) {
+      formData.append("upload_id", uploadId);
+    }
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Content-Range": contentRange,
+          "X-Unique-Upload-Id": uniqueUploadId, // ✅ 修正
+        },
+      },
+    );
+
+    const data = await res.json();
+    console.log("chunk:", i, data);
+
+    if (data.upload_id) {
+      uploadId = data.upload_id;
+    }
+
+    // ✅ 修正
+    if (data.done === true) {
+      finalData = data;
+    }
+  }
+
+  // ✅ 修正
+  if (!finalData || !finalData.secure_url) {
+    console.error("最終レスポンス:", finalData);
+    throw new Error("アップロードが完了していません");
+  }
+
+  return finalData.secure_url;
+};
 
 const socket = io(SOCKET_URL);
 
@@ -217,20 +298,41 @@ const RepositoryProvider = (props) => {
 
   const createRepository = async () => {
     setRepositoryCreateError(null);
+    let videoUrl = null;
+
     const formData = new FormData();
     formData.append("url", repoUrl);
     formData.append("title", title);
     formData.append("description", description);
     formData.append("room", repositoryRoom.id);
+    // if (demoVideo) {
+    //   videoUrl = await uploadToCloudinary(demoVideo); // ファイルを追加
+    // }
     if (demoVideo) {
-      formData.append("demo_video", demoVideo, demoVideo.name); // ファイルを追加
+      if (demoVideo.size > 10 * 1024 * 1024) {
+        videoUrl = await uploadLargeVideo(demoVideo);
+      } else {
+        videoUrl = await uploadToCloudinary(demoVideo);
+      }
     }
+
+    console.log("アップロードした動画のURL:", videoUrl);
+
+    const requestData = {
+      url: repoUrl,
+      title: title,
+      description: description,
+      room: repositoryRoom.id,
+      demo_video_url: videoUrl, // ←ここが重要！！
+      categories: RepositoryCategories,
+    };
+
     RepositoryCategories.forEach((cat) => {
       formData.append("categories", cat); // 各カテゴリIDを追加
     });
 
     try {
-      const response = await apiClient.post("/api/repositories/", formData, {
+      const response = await apiClient.post("/api/repositories/", requestData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `JWT ${token}`,

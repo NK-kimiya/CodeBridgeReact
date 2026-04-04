@@ -51,7 +51,11 @@ const RepositoryDetail = () => {
           {repositoryDetail.url}
         </a>
         {repositoryDetail.demo_video_url && (
-          <video controls className="repository-detail-area-video">
+          <video
+            key={repositoryDetail.demo_video_url} // ←これが重要
+            controls
+            className="repository-detail-area-video"
+          >
             <source
               src={repositoryDetail.demo_video_url.replace(
                 "/upload/",
