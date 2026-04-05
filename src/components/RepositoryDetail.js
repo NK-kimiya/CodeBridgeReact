@@ -1,10 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { RepositoryContext } from "../context/RepositoryProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faUserMinus } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { API_BASE_URL } from "../config";
+
 const RepositoryDetail = () => {
   const { repositoryDetail } = useContext(RepositoryContext);
   const { messageChange } = useContext(RepositoryContext);
@@ -31,16 +30,15 @@ const RepositoryDetail = () => {
   ) {
     // データが不足しているか、存在しない場合はこちらを表示
     return (
-      <div className="git-icon">
-        <FontAwesomeIcon icon={faGithub} />
+      <div className="text-center">
         <p>詳細表示はされていません。</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="repository-detail-area">
+    <div className="repository-detail-area">
+      <div className="pt-sm-5 border-bottom">
         <h2 className="repository-detail-area-title">
           {repositoryDetail.title}
         </h2>
@@ -54,7 +52,8 @@ const RepositoryDetail = () => {
           <video
             key={repositoryDetail.demo_video_url} // ←これが重要
             controls
-            className="repository-detail-area-video"
+            className="video-player"
+            style={{}}
           >
             <source
               src={repositoryDetail.demo_video_url.replace(
@@ -67,7 +66,7 @@ const RepositoryDetail = () => {
         )}
         {repositoryDetail.favorite ? (
           <button
-            className="repository-favorite-delete-btn"
+            className="badge rounded-pill text-bg-secondary border-0 p-2 mt-2"
             onClick={() => removeFavoriteRepository(repositoryDetail.id)}
           >
             お気に入り解除
@@ -75,7 +74,7 @@ const RepositoryDetail = () => {
           </button>
         ) : (
           <button
-            className="repository-favorite-add-btn"
+            className="badge rounded-pill text-bg-danger border-0 p-2 mt-2"
             onClick={() => addFavoriteRepository(repositoryDetail.id)}
           >
             お気に入りに追加
@@ -90,7 +89,7 @@ const RepositoryDetail = () => {
           <p className="error_message">{fetchMessageError}</p>
           {fetchmessage.filter((msg) => msg.repository === repositoryDetail.id)
             .length === 0 ? (
-            <p>メッセージはまだありません。</p>
+            <p className="text-center">メッセージはまだありません。</p>
           ) : (
             fetchmessage
               .filter((msg) => msg.repository === repositoryDetail.id)
@@ -114,14 +113,21 @@ const RepositoryDetail = () => {
           )}
         </div>
 
-        <div id="message-send-area">
-          <textarea
-            value={message}
-            onChange={messageChange}
-            placeholder="メッセージを入力して下さい。"
-          />
+        <div className="">
+          <div className="d-flex justify-content-center">
+            <textarea
+              className="form-control w-75"
+              value={message}
+              onChange={messageChange}
+              placeholder="メッセージを入力して下さい。"
+            />
+          </div>
+          <div className="d-flex justify-content-center pt-3">
+            <button onClick={messageSend} className="btn btn-warning px-5">
+              投稿
+            </button>
+          </div>
           <p className="error_message">{messageError}</p>
-          <button onClick={messageSend}>送信</button>
         </div>
       </div>
     </div>

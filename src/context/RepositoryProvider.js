@@ -635,8 +635,6 @@ const RepositoryProvider = (props) => {
         prevData.filter((repo) => repo.id !== repositoryId),
       );
 
-      setRepositoryDetail(null);
-
       console.log("お気に入り解除成功:", response.data);
     } catch (error) {
       if (error.response) {

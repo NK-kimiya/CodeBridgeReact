@@ -1,15 +1,32 @@
-.custom-width {
-  width: 100%;
+.video-player {
+  display: block;
+  width: 500px;
 }
 
-@media (min-width: 768px) {
-  .custom-width {
-    width: 75%;
+.room-name-title {
+  font-size: 30px;
+}
+
+@media (max-width: 572px) {
+  .video-player {
+    width: 250px;
   }
 }
 
-@media (min-width: 992px) {
-  .custom-width {
-    width: 50%;
+@media (min-width: 576px) {
+  .video-player {
+    width: 300px !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .w-sm-auto {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .room-name-title {
+    padding-top: 80px;
   }
 }

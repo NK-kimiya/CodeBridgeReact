@@ -24,61 +24,88 @@ const Nav = (props) => {
     setSubNavToggle((prev) => !prev);
   };
   return (
-    <nav>
-      <h1>Code Bridge</h1>
-      <button onClick={Logout}>ログアウト</button>
-      <div className={subNavToggle ? "sub-nav-area" : "sub-nav-area-none"}>
-        {subNavToggle ? (
-          <button onClick={toggleSubNav} className="sub-nav-toggle-btn">
-            ＜
+    <div>
+      <nav className="navbar navbar-dark bg-dark fixed-top d-md-none d-sm-block">
+        <div className="container-fluid">
+          <h2 className="text-center text-white">CODE BRIDGE</h2>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon "></span>
           </button>
-        ) : (
-          <button onClick={toggleSubNav} className="sub-nav-toggle-btn">
-            ＞
-          </button>
-        )}
+          <div
+            className="offcanvas offcanvas-end bg-dark"
+            tabindex="-1"
+            id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel"
+          >
+            <div className="offcanvas-header">
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="offcanvas-body ">
+              <button onClick={Logout} className="btn btn-primary m-2">
+                ログアウト
+              </button>
+              <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li className="nav-item p-2">
+                  <a href="/app" className="text-white ">
+                    ルームTOP
+                  </a>
+                </li>
+                <li className="nav-item p-2">
+                  <a href="/favorite" className="text-white ">
+                    お気に入り
+                  </a>
+                </li>
+                <li className="nav-item p-2">
+                  <a href="#" onClick={roomLogout} className="text-white">
+                    ルーム退出
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
 
-        <ul>
-          {subNavToggle ? (
-            <li>
-              <a href="/app">ルームTOP</a>
-            </li>
-          ) : (
-            <li>
-              <a href="/app">
-                <FontAwesomeIcon icon={faHouse} />
+      <nav className="bg-dark min-vh-100 d-none d-md-block">
+        <h2 className="text-white text-center p-3">CODE BRIDGE</h2>
+        <div className="d-flex  flex-column justify-content-center align-items-center">
+          <button onClick={Logout} className="btn btn-primary m-2">
+            ログアウト
+          </button>
+          <ul className="ps-0 list-unstyled text-center">
+            <li className="pt-2">
+              <a href="/app" className="text-white ">
+                ルームTOP
               </a>
             </li>
-          )}
 
-          {subNavToggle ? (
-            <li>
-              <a href="/favorite">お気に入り</a>
-            </li>
-          ) : (
-            <li>
-              <a href="/favorite">
-                <FontAwesomeIcon icon={faThumbsUp} />
+            <li className="pt-2">
+              <a href="/favorite" className="text-white ">
+                お気に入り
               </a>
             </li>
-          )}
 
-          {subNavToggle ? (
-            <li>
-              <a href="#" onClick={roomLogout}>
+            <li className="pt-2">
+              <a href="#" onClick={roomLogout} className="text-white">
                 ルーム退出
               </a>
             </li>
-          ) : (
-            <li>
-              <a href="#" onClick={roomLogout}>
-                <FontAwesomeIcon icon={faDoorOpen} />
-              </a>
-            </li>
-          )}
-        </ul>
-      </div>
-    </nav>
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 
