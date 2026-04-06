@@ -110,21 +110,22 @@ const RepositoryProvider = (props) => {
   const [description, setDescription] = useState("");
   const [demoVideo, setDemoVideo] = useState("");
   const [RepositoryCategories, setRepositoryCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [repositoryDetail, setRepositoryDetail] = useState(null);
   const [message, setMessage] = useState(""); //チャットのメッセージ
   const [fetchmessage, setFetchMessage] = useState([]);
-  const [socketmessage, setSocketMessage] = useState("");
   const [username, setUserName] = useState(null);
   const [targetRepositoryId, setTargetRepositoryID] = useState(null);
   const [receiveMessage, setReceiveMessage] = useState(null);
   const [favoriteRepositories, setFavoriteRepositories] = useState([]);
   const [repositoryCreateError, setRepositoryCreateError] = useState();
-  const [repositoryErrorMessage, setRepositoryErrorMessage] = useState();
+  const [repositoryErrorMessage, setRepositoryErrorMessage] = useState(false);
   const [messageError, setMessageError] = useState();
   const [fetchMessageError, setFetchMessageError] = useState();
   const [favoriteError, setFavoriteError] = useState();
   const { categories, selectedCategories } = useContext(CategoryContext);
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
+  const [isLoadingFavorites, setIsLoadingFavorites] = useState(false);
 
   const [cookies] = useCookies(["jwt-token"]);
   const token = cookies["jwt-token"];
@@ -273,7 +274,6 @@ const RepositoryProvider = (props) => {
         },
       );
 
-      console.log("一覧取得したリポジトリ", response.data);
       setRepositoryData(response.data);
 
       if (response.status === 200) {
@@ -282,12 +282,12 @@ const RepositoryProvider = (props) => {
         return [];
       }
     } catch (error) {
+      setRepositoryErrorMessage(true);
       if (error.response) {
         if (error.response.status === 401) {
           console.warn("⚠️ トークンが無効、または期限切れです");
           Logout();
         } else {
-          setRepositoryErrorMessage("リポジトリ一覧の取得に失敗しました。");
           console.error("リクエストエラー:", error.response.data);
         }
       } else {
@@ -297,6 +297,7 @@ const RepositoryProvider = (props) => {
   };
 
   const createRepository = async () => {
+    setIsLoading(true);
     setRepositoryCreateError(null);
     let videoUrl = null;
 
@@ -358,6 +359,8 @@ const RepositoryProvider = (props) => {
       } else {
         console.error("Axiosリクエスト失敗:", error.message);
       }
+    } finally {
+      setIsLoading(false); // ←終了（成功でも失敗でも）
     }
   };
 
@@ -370,6 +373,7 @@ const RepositoryProvider = (props) => {
   //メッセージを送信する関数
   const messageSend = async () => {
     setMessageError(null);
+    setIsSendingMessage(true);
     try {
       const response = await apiClient.post(
         "/api/messages/create/",
@@ -417,6 +421,8 @@ const RepositoryProvider = (props) => {
       } else {
         console.error("Axiosリクエスト失敗:", error.message);
       }
+    } finally {
+      setIsSendingMessage(false);
     }
   };
 
@@ -582,6 +588,8 @@ const RepositoryProvider = (props) => {
 
   //お気に入りの一覧を取得する
   const fetchFavoriteRepositories = async () => {
+    setIsLoadingFavorites(true);
+
     try {
       const response = await apiClient.get("/api/favorites/", {
         headers: {
@@ -602,8 +610,11 @@ const RepositoryProvider = (props) => {
         }
       } else {
         console.error("Axiosリクエスト失敗:", error.message);
+
+        return [];
       }
-      return [];
+    } finally {
+      setIsLoadingFavorites(false);
     }
   };
 
@@ -679,6 +690,7 @@ const RepositoryProvider = (props) => {
         RepositoryCategories,
         handleRepositoryCategory,
         createRepository,
+        isLoading,
         fetchRepositories,
         categories,
         repositoryDetail,
@@ -700,6 +712,8 @@ const RepositoryProvider = (props) => {
         messageError,
         fetchMessageError,
         favoriteError,
+        isSendingMessage,
+        isLoadingFavorites,
       }}
     >
       {children}

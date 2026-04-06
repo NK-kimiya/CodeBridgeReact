@@ -18,6 +18,7 @@ const Repository = () => {
     RepositoryCategories,
     handleRepositoryCategory,
     createRepository,
+    isLoading,
     categories,
     RepositoryFilterCategories,
     fetchRepositories,
@@ -29,15 +30,39 @@ const Repository = () => {
 
   const { setSelectedCategories } = useContext(CategoryContext);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    // MP4チェック
+    if (file.type !== "video/mp4") {
+      setRepositoryCreateError("MP4ファイルのみアップロード可能です。");
+      setDemoVideo(null);
+      return;
+    }
+
+    // サイズチェック（100MB）
+    if (file.size > 100 * 1024 * 1024) {
+      setRepositoryCreateError("ファイルサイズが大きすぎます（100MB以下）。");
+      setDemoVideo(null);
+      return;
+    }
+
+    // OKならセット
+    setRepositoryCreateError(null);
+    setDemoVideo(file);
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
     setRepositoryCreateError(null);
   };
   const closeModal = () => setIsModalOpen(false);
 
-  const listRepositories = repositoryData.map((repository) => {
-    return <RepositoryItem key={repository.id} Repository={repository} />;
-  });
+  const listRepositories = repositoryData.map((repository) => (
+    <RepositoryItem key={repository.id} Repository={repository} />
+  ));
 
   //リポジトリのカテゴリー検索をクリアにする
   const RepositoryFilterClear = () => {
@@ -81,7 +106,7 @@ const Repository = () => {
 
               <div className="mb-3">
                 <label for="exampleInputTitle" className="form-label">
-                  URL
+                  タイトル
                 </label>
                 <input
                   type="text"
@@ -116,8 +141,10 @@ const Repository = () => {
                 type="file"
                 id="formFile"
                 className="form-control"
-                onChange={(e) => setDemoVideo(e.target.files[0])}
+                onChange={handleFileChange}
+                // onChange={(e) => setDemoVideo(e.target.files[0])}
               />
+              <p className="text-danger">{repositoryCreateError}</p>
               <div id="repository-category-selected-area">
                 {categories.map((category) => (
                   <div
@@ -133,8 +160,17 @@ const Repository = () => {
                   </div>
                 ))}
               </div>
-              <p className="error_message">{repositoryCreateError}</p>
-              <button onClick={createRepository} className="btn btn-success">
+
+              {isLoading && (
+                <div className="text-center">
+                  <div className="spinner-border" role="status"></div>
+                </div>
+              )}
+              <button
+                onClick={createRepository}
+                className="btn btn-success"
+                disabled={isLoading}
+              >
                 作成する
               </button>
               <br></br>
@@ -145,7 +181,20 @@ const Repository = () => {
           </div>
         </div>
       )}
-      <p className="error_message">{repositoryErrorMessage}</p>
+
+      {repositoryErrorMessage && (
+        <div className="text-center mt-3">
+          <p className="text-danger">取得に失敗しました。</p>
+
+          <button
+            className="btn btn-link"
+            onClick={() => fetchRepositories(repositoryRoom.id)}
+          >
+            再取得する
+          </button>
+        </div>
+      )}
+
       <div className="card">{listRepositories}</div>
     </div>
   );

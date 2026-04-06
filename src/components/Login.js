@@ -68,6 +68,7 @@ const Login = (props) => {
 
   const login = async (event) => {
     event.preventDefault();
+    setLoginErrorMessage(null);
     if (state.isLoginView) {
       try {
         const res = await apiClient.post(

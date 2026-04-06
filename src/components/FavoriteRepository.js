@@ -4,16 +4,30 @@ import RepositoryItem from "./RepositoryItem";
 import RepositoryDetail from "./RepositoryDetail";
 import Nav from "./Nav";
 const FavoriteRepository = () => {
-  const { fetchFavoriteRepositories, favoriteRepositories } =
-    useContext(RepositoryContext);
+  const {
+    fetchFavoriteRepositories,
+    favoriteRepositories,
+    isLoadingFavorites,
+  } = useContext(RepositoryContext);
 
   useEffect(() => {
     fetchFavoriteRepositories();
   }, []);
 
-  const listRepositories = favoriteRepositories.map((repository) => {
-    return <RepositoryItem key={repository.id} Repository={repository} />;
-  });
+  const listRepositories = isLoadingFavorites ? (
+    // ① ローディング中
+    <div className="text-center mt-3">
+      <div className="spinner-border"></div>
+    </div>
+  ) : favoriteRepositories.length === 0 ? (
+    // ② データなし
+    <p className="text-center mt-3">お気に入りはありません</p>
+  ) : (
+    // ③ データあり
+    favoriteRepositories.map((repository) => (
+      <RepositoryItem key={repository.id} Repository={repository} />
+    ))
+  );
   return (
     <div className="row g-0">
       <button

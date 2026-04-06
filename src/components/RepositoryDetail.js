@@ -8,7 +8,7 @@ const RepositoryDetail = () => {
   const { repositoryDetail } = useContext(RepositoryContext);
   const { messageChange } = useContext(RepositoryContext);
   const { message } = useContext(RepositoryContext);
-  const { messageSend } = useContext(RepositoryContext);
+  const { messageSend, isSendingMessage } = useContext(RepositoryContext);
   const { fetchmessage } = useContext(RepositoryContext);
   const { addFavoriteRepository } = useContext(RepositoryContext);
   const { removeFavoriteRepository } = useContext(RepositoryContext);
@@ -124,7 +124,14 @@ const RepositoryDetail = () => {
           </div>
           <div className="d-flex justify-content-center pt-3">
             <button onClick={messageSend} className="btn btn-warning px-5">
-              投稿
+              {isSendingMessage ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2"></span>
+                  送信中...
+                </>
+              ) : (
+                "投稿"
+              )}
             </button>
           </div>
           <p className="error_message">{messageError}</p>
